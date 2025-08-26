@@ -141,21 +141,21 @@
 // const averageAge = (ageRainiel + ageJosh) / 2;
 // console.log(ageRainiel, ageJosh, averageAge);
 
-// // Operator Precedence
-console.log("=== OPERATOR PRECEDENCE ===");
+// // // Operator Precedence
+// console.log("=== OPERATOR PRECEDENCE ===");
 
-const now = 2037;
-const ageRainiel = now - 2004;  
-const ageJosh = now - 2018;
+// const now = 2037;
+// const ageRainiel = now - 2004;  
+// const ageJosh = now - 2018;
 
-console.log(now - 2004, now - 2018);
+// console.log(now - 2004, now - 2018);
 
-let x, y;
-x = y = 25 - 10 - 5; 
-console.log(x, y);
+// let x, y;
+// x = y = 25 - 10 - 5; 
+// console.log(x, y);
 
-const averageAge = (ageRainiel + ageJosh) / 2;
-console.log(ageRainiel, ageJosh, averageAge);
+// const averageAge = (ageRainiel + ageJosh) / 2;
+// console.log(ageRainiel, ageJosh, averageAge);
 
 // ///////// BMI Calculator
 // console.log("=== BMI Calculator ===")
@@ -191,31 +191,251 @@ console.log(ageRainiel, ageJosh, averageAge);
 // console.log("Mark has a Higher BMI than John: ", markHigherBMI2);
 
 
+// // // // // JavaScript Fundamentals - Hour 3
+////////////////////////////////////////////////////////////////////////
+// Strings and Template Literals
+// const firstName = "Jonas";
+// const job = "teacher";
+// const birthYear = 1991;
+// const year = 2037;
+
+// const jonas =
+//   "I'm " + firstName + ", a " + (year - birthYear) + " year old " + job + "!";
+// console.log(jonas);
+
+// const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`
+// console.log(jonasNew);
+
+// console.log(`I'm ${2037 - 1991} years old`);
+// console.log(`Math works: ${2 + 3}, equals 5`);
+// console.log(`Comparisons too: ${5 > 3}`);
+
+// console.log(`Just a regular string...`);
+
+// Old way
+console.log(
+    "String with \n\
+    multiple \n\
+    lines"
+);
+
+// New way
+console.log(`String 
+    multiple 
+    lines`);
+
+// Create Variables for:
+const myName = "Rainiel";
+const myAge = 20;
+const myJob = "Student";
+const currentYear = 2024;
+
+console.log(`Hi, I'm ${myName}, a ${myAge} year old ${myJob}!`);
+
+// Create a template literal that:
+console.log(`My birth year is ${currentYear - myAge}.`);
+console.log(`10 multiplied by 5 is: ${10 * 5}.`);
+console.log(`I am younger than 50 years old: ${myAge < 50}.`);
+
+// // Taking Decisions: if / else Statements
+const age = 15;
+
+if (age >= 18) {
+    console.log("Sarah can start driving license 🚗");
+} else { 
+    const yearsLeft = 18 - age;
+    console.log(`Sarah is too young. Wait another ${yearsLeft} years :)`);
+}
+
+const birthYear = 2012;
+
+let century;
+if (birthYear <= 2000) {
+    century = 20;
+} else {
+    century = 21;
+}
+console.log(century);
 
 
+const score = 85;
+
+if (score >= 60) {
+    console.log(`You passed with ${score} points!`);
+    console.log("Congratulations!");
+} else { 
+    const pointsNeeded = 60 - score;
+    console.log(`You failed, you need ${pointsNeeded} more points to pass.`);
+}
 
 
+// Create a Grade Calculator
+
+const testScore = 93;
+
+// Use if/else to determine:
+// 90+: "Excellent! Grade A"
+// 80-89: "Good job! Grade B"
+// 70-79: "Not bad! Grade C"
+// 60-69: "You passed! Grade D"
+// Below 60: "You failed! Study harder"
 
 
+if (testScore >= 90) {
+    console.log("Excellent! Grade A");
+} else if (testScore >= 80) {
+    console.log("Good job! Grade B");
+} else if (testScore >= 70) {
+    console.log("Not bad! Grade C");
+} else if (testScore >= 60) {
+    console.log("You passed! Grade D");
+} else {
+    console.log("You failed! Study harder");
+}
 
 
+// Create an age verification system:
+
+const userAge = 11; 
+
+// Rules:
+// - 18+: "Welcome! You can access all content"
+// - 13-17: "Welcome! Restricted content only"
+// - Under 13: "Sorry, you're too young"
+
+if (userAge >= 18) {
+    console.log("Welcome! You can access all content");
+} else if (userAge >= 13) {
+    console.log("Welcome! Restricted content only");
+} else {
+    console.log("Sorry, you're too young");
+}
 
 
+///////////////////////////
+// Truthy and Falsy Values
+
+console.log(Boolean(0)); 
+console.log(Boolean(undefined));
+console.log(Boolean("Jonas"));
+console.log(Boolean({}));
+console.log(Boolean(""));
+
+const money = 0;
+if (money) {
+  console.log("Don't spend it all ;)");
+} else {
+  console.log("You should get a job!");
+}
+
+let height = 0;
+if (height) {
+  console.log("YAY! Height is defined");
+} else {
+  console.log("Height is UNDEFINED");
+}
+
+if (height !== undefined) {
+  console.log("Height is defined");
+}
 
 
+// // Test these values with Boolean() and if statements:
+const values = [0, 1, "", "hello", undefined, null, NaN, {}, []];
+
+// For each value, log:
+// 1. The value itself
+// 2. Boolean(value)
+// 3. Whether it passes an if statement
+
+// Example for first value:
+console.log("Value:", 0);
+console.log("Boolean:", Boolean(0));
+if (0) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", 1);
+console.log("Boolean:", Boolean(1));
+if (1) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", "");
+console.log("Boolean:", Boolean(""));
+if ("") {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", "hello");
+console.log("Boolean:", Boolean("hello"));
+if ("hello") {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", undefined);
+console.log("Boolean:", Boolean(undefined));
+if (undefined) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", null);
+console.log("Boolean:", Boolean(null));
+if (null) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", NaN);
+console.log("Boolean:", Boolean(NaN));
+if (NaN) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", {});
+console.log("Boolean:", Boolean({}));
+if ({}) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
+
+console.log("Value:", []);
+console.log("Boolean:", Boolean([]));
+if ([]) {
+  console.log("Truthy!");
+} else {
+  console.log("Falsy!");
+}
 
 
+////////////////////////////////////
+// Coding Challenge #2
+// Test Data 1
+const massMark = 78;
+const heightMark = 1.69;
+const massJohn = 92;
+const heightJohn = 1.95;
 
+bmiMark = massMark / heightMark ** 2;
+bmiJohn = massJohn / heightJohn ** 2;
+console.log(bmiMark, bmiJohn);
 
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////
-// Type Conversion and Coercion
+if (bmiMark > bmiJohn) {
+    console.log(`Mark's BMI ${bmiMark} is higher than John's ${bmiJohn}`);
+}   else {
+    console.log(`John's BMI ${bmiJohn} is higher than Mark's ${bmiMark}`);
+}
