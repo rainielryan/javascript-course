@@ -1,0 +1,16 @@
+feat: implement arrays and array methods
+
+- Add array creation and element access with zero-based indexing
+- Implement essential array methods: push, pop, shift, unshift, indexOf, includes
+- Create array iteration patterns with for loops and forEach method
+- Build student grade management system combining functions and arrays
+- Establish data processing patterns for real-world applications
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   02-fundamentals-part-2/starter/script.js
+#
