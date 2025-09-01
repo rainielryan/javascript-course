@@ -309,12 +309,222 @@ console.log(`Passing students: ${passing} out of ${grades.length}`);
 
 
 
+//////////////////////////////////////////////////
+// // // JavaScript Fundamentals Part 2 - Hour 3
+
+// // Problems with Arrays
+const rainArray = [
+  "Rainiel",
+  "Necio",
+  2037 - 2004,
+  "student",
+  ["Michael", "Peter", "Steven"],
+];
+
+console.log(rainArray[0]); 
+console.log(rainArray[1]); 
+
+
+const rainObject = {
+    firstName: "Rainiel",
+    lastName: "Necio",
+    age: 2025 - 2004,
+    job: "student",
+    friends: ["Gel", "Gwen", "Yuan"],
+};
+
+console.log(rainObject);
+
+// // Property access methods
+// Dot notation
+console.log(rainObject.firstName);
+console.log(rainObject.lastName);
+console.log(rainObject.age);
+
+// Bracket notation
+console.log(rainObject["firstName"]);
+console.log(rainObject["lastName"]);
+console.log(rainObject["age"]);
+
+const nameKey = "Name";
+console.log(rainObject["first" + nameKey]);
+
+
+// Modifying existing properties
+rainObject.job = "programmer";
+rainObject["age"] = 25;
+console.log(rainObject);
+
+
+// add new properties
+rainObject.location = "Philippines";
+rainObject["instagram"] = "@rnlryan";
+rainObject.hasDriverLicense = true;
+console.log(rainObject);
+
+const property = "job";
+console.log(rainObject[property]);
+
+// 1. Property name is in a variable
+// 2. Property name has spaces or special characters
+// 3. Property name is computed/dynamic
+// Otherwise, use dot notation
+
+
+// // Objects vs Arrays Desicion Making
+
+// Arrays
+const listOfYears = [1991, 1984, 2008, 2020];
+const shoppingList = ["apples", "bananas", "milk", "bread"];
+const testScores = [85, 92, 78, 96];
+
+// Objects
+const person = {
+  name: "Jonas",
+  age: 46,
+  occupation: "teacher",
+};
+
+const car = {
+  brand: "Toyota",
+  model: "Camry",
+  year: 2020,
+  color: "blue",
+};
+
+// Objects can contain arrays, arrays can contain objects
+const student = {
+  name: "Sarah",
+  grades: [85, 92, 78], 
+  address: {
+    street: "123 Main St",
+    city: "New York",
+  },
+};
+
+console.log(student.grades[0]);
+console.log(student.address.city);
+
+// Object Methods
+const john = {
+  firstName: "John",
+  lastName: "Doe",
+  birthYear: 1995,
+  job: "teacher",
+  friends: ["Michael", "Peter", "Steven"],
+  hasDriversLicense: true,
+
+  calcAge: function (birthYear) {
+    return 2025 - birthYear;
+  },
+};
+
+console.log(john.calcAge(2000));
+
+// 'this' keyword
+const johnImproved = {
+  firstName: "John",
+  lastName: "Doe",
+  birthYear: 1995,
+  job: "teacher",
+  friends: ["Michael", "Peter", "Steven"],
+  hasDriversLicense: false,
+
+  calcAge: function () {
+    this.age = 2025 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function () {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${this.job}, and he has ${
+      this.hasDriversLicense ? "a" : "no"
+    } driver's license.`;
+ },
+};
+
+console.log(johnImproved.calcAge()); 
+console.log(johnImproved.age);
+console.log(johnImproved.getSummary());
 
 
 
+////////////////////////////////////
+// Coding Challenge #3 - User Profile System
 
+const user = {
+  firstName: "Sarah",
+  lastName: "Johnson",
+  birthYear: 1995,
+  location: "New York",
+  interests: ["photography", "travel", "coding"],
+  friends: [
+    { name: "Michael", status: "active" },
+    { name: "Emma", status: "inactive" },
+    { name: "David", status: "active" },
+  ],
+  isActive: true,
 
+  // Calculate age method
+  calcAge: function () {
+    // Calculate age and store as this.age
+    // Hint: Use new Date().getFullYear() for current year
+    // Your code here
+    this.age = new Date().getFullYear() - this.birthYear;
+    return this.age;
+  },
 
+  // Add friend method
+  addFriend: function (name, status = "active") {
+    // Add new friend object to this.friends array
+    // Return the new length of friends array
+    // Your code here
+    this.friends.push({ name, status: status });
+    return this.friends.length;
+  },
+
+  // Get active friends count
+  getActiveFriends: function () {
+    // Filter friends array to count only active friends
+    // Hint: use this.friends.filter()
+    // Your code here
+    return this.friends.filter(friend => friend.status === "active").length;
+  },
+
+  // Toggle active status
+  toggleStatus: function () {
+    // Switch this.isActive between true and false
+    // Return the new status
+    // Your code here
+    this.isActive = !this.isActive;
+    return this.isActive;
+  },
+
+  // Generate profile summary
+  getSummary: function () {
+    // Create a social media style profile summary
+    // Include: name, age, location, status, friend counts, interests
+    // Use template literals for nice formatting
+    // Your code here
+    const age = this.calcAge
+    const activeFriends = this.getActiveFriends();
+    const totalFriends = this.friends.length;
+    const status = this.isActive ? "Active" : "Inactive";
+
+    return `${this.firstName} ${this.lastName}, Age: ${age()}, Location: ${this.location}
+    Status: ${status}
+    Friends: ${activeFriends} active out of ${totalFriends}
+    Interests: ${this.interests.join(", ")}`;
+  
+    return 
+  },
+};
+
+// Test your user profile system
+console.log(user.getSummary());
+user.addFriend("Alex", "active");
+user.toggleStatus();
+console.log(`\nAfter updates:`);
+console.log(user.getSummary());
 
 
 
