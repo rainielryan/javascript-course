@@ -15,13 +15,18 @@ const btnCloseModalEl = document.querySelector('.close-modal');
 const btnsOpenModalEl = document.querySelectorAll('.show-modal');
 
 
+let lastFocusedButton = null;
 const openModal = function () {
     // remove hidden classname from modal
   modalEl.classList.remove('hidden');
 
     // remove hidden keyword classname from overlay
   overlayEl.classList.remove('hidden');
+
+  modalEl.focus();
+  lastFocusedButton = document.activeElement;
 };
+
 
 const closeModal = function () {
     // add hidden classname to modal
@@ -29,6 +34,9 @@ const closeModal = function () {
 
     // add hidden classname to overlay
   overlayEl.classList.add('hidden');
+  if (lastFocusedButton) {
+    lastFocusedButton.focus();
+  };
 };
 
 
@@ -37,4 +45,16 @@ btnCloseModalEl.addEventListener('click', closeModal);
 overlayEl.addEventListener('click', closeModal);
 
 
+//////////////////////////////////////////
+// // // Hour 2 Code - Keyboard Events
 
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modalEl.classList.contains('hidden')) {
+        closeModal();
+    }
+});
+
+modalEl.setAttribute('role', 'dialog');
+modalEl.setAttribute('aria-modal', 'true');
+
+btnCloseModalEl.setAttribute('aria-label', 'Close modal');
