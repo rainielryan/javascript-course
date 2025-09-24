@@ -167,30 +167,107 @@
 // user.printHobbiesGood();
 
 
-const functionTypes = {
-    regualarFunction: function  () {
-        console.log('Arguments lenght: ', arguments.length);
-        console.log('First argument: ', arguments[0]);
-    },
+// const functionTypes = {
+//     regualarFunction: function  () {
+//         console.log('Arguments lenght: ', arguments.length);
+//         console.log('First argument: ', arguments[0]);
+//     },
 
-    arrowFunction: () => {
-        console.log('Arrow function called');
-    },
+//     arrowFunction: () => {
+//         console.log('Arrow function called');
+//     },
 
-    modernFunction: (...args) => {
-        console.log('Args length: ', args.length);
-        console.log('First arg: ', args[0]);
-    },
+//     modernFunction: (...args) => {
+//         console.log('Args length: ', args.length);
+//         console.log('First arg: ', args[0]);
+//     },
+// };
+
+// functionTypes.regualarFunction('hello', 'world');
+// // functionTypes.arrowFunction('test');
+// functionTypes.modernFunction('modern', 'approach');
+
+
+////////////////////////////////////////////////
+// // // Hour 3 Code - Primitives vs Objects, Copying & Strict Mode
+'use strict';
+
+// // Primitive
+// let age = 30;
+
+// // we copy primitive, making independent copy
+// let oldAge = age;
+
+// age = 31;
+
+// console.log('age: ', age);
+// console.log('oldAge: ', oldAge);
+
+// // OBJECT HEAP
+// // objects are stored in heap, varibales hold references
+// const me = { name: 'Rain', age: 20 };
+
+// const friend = me;
+
+// friend.age = 24;
+
+// console.log('me: ', me);
+// console.log('friend: ', friend);
+
+
+function changeAge(person, newAge) {
+    person.age = newAge;
+    return person;
+}
+
+const originalPerson = { name: 'Sarah', age: 25 };
+const updatedPerson =  changeAge(originalPerson, 30);
+
+console.log('original: ', originalPerson);
+console.log('updated: ', updatedPerson);
+console.log('same object?: ', originalPerson === updatedPerson);
+
+
+const original = {
+    name: 'Alice',
+    age: 28,
+    hobbies: ['reading', 'coding'],
 };
 
-functionTypes.regualarFunction('hello', 'world');
-// functionTypes.arrowFunction('test');
-functionTypes.modernFunction('modern', 'approach');
+
+// Shallow Copy
+const shallowCopy = { ...original };
+
+shallowCopy.name = 'Bob';
+console.log('original name: ', original.name);
+console.log('copy name: ', shallowCopy.name);
+
+shallowCopy.hobbies.push('gaming');
+console.log('original hobbies: ', original.hobbies);
+console.log('copy hobbies: ', shallowCopy.hobbies);
+
+const anotherCopy = Object.assign({}, original);
+console.log('Object.assign copy: ', anotherCopy);
 
 
+// Deep Copy
+const deepOriginal = { 
+    name: 'Charlie',
+    age: 32,
+    address: { city: 'Paris', country: 'France'},
+    hobbies: ['travel', 'photography'],
+};
 
+const deepCopy = structuredClone(deepOriginal);
 
+deepCopy.address.city = 'London';
+deepCopy.address.country = 'England';
+deepCopy.hobbies.push('cooking');
 
+console.log('original address: ', deepOriginal.address);
+console.log('copy address: ', deepCopy.address);
+console.log('original hobbies: ', deepOriginal.hobbies);
+console.log('copy hobbies: ', deepCopy.hobbies);
 
 
 
