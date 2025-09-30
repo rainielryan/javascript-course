@@ -4,6 +4,7 @@
 
 console.log('Pig Game Ready!');
 
+
 // game state variables
 let scores, currentScore, activePlayer, playing;
 
@@ -19,15 +20,18 @@ const score0El = document.querySelector('#score--0');
 // select score 1 element
 const score1El = document.getElementById('score--1');
 
-// select current score elements
 const current0El = document.getElementById('current--0');
+
 const current1El = document.getElementById('current--1');
 
-// select dice image element
 const diceEl = document.querySelector('.dice');
+
 const btnRoll = document.querySelector('.btn--roll');
 
-// game initialization function
+const btnHoldEl = document.querySelector('.btn--hold');
+
+
+// // game initialization function
 const init = function () {
     // start with both players at 0
   scores = [0, 0];
@@ -70,9 +74,32 @@ btnRoll.addEventListener('click', function () {
       document.getElementById(`current--${activePlayer}`).textContent = currentScore;
     } else {
         // handle rolling a 1
-        currentScore = 0;
-        
-        document.getElementById(`current--${activePlayer}`).textContent = 0;
+        switchPlayer();
     }
   }
 });
+
+
+// handles switching players - function expression
+const switchPlayer = function () {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+  
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  
+  player0El.classList.toggle('player--active');
+  player1El.classList.toggle('player--active');
+};
+
+btnHoldEl.addEventListener('click', function () {
+  if (playing) {
+    scores[activePlayer] += currentScore;
+    document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+    switchPlayer();
+  }
+});
+
+
+
+
+
