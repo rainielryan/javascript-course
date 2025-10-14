@@ -126,12 +126,51 @@ class App {
 
   constructor() {
     console.log('App Starting');
+
+    this._getLocalStorage();
     this._getPosition();
 
     form.addEventListener('submit', this._newWorkout.bind(this));
     // attach event handlers for workout type change
     inputType.addEventListener('change', this._toggleElevationField);
+
+    // add click handlinng for workout list
+    containerWorkouts.addEventListener(
+      'click',
+      this._moveToPopup.bind(this)
+    );
+
+    document.addEventListener('keydown', this._handleKeydown.bind(this));
   }
+
+  _handleKeydown(e) {
+    if (e.key === 'Escape' && !form.classList.contains('hidden')) {
+      this._hideForm();
+      console.log('Form hidden via Escape key');
+    }
+  }
+
+  _moveToPopup(e) {
+  // find theclosest workout element
+  const workoutEl = e.target.closest('.workout');
+
+  // guard clause
+  if (!workoutEl) return;
+
+  // find the workout object using the data-id attribute
+  const workout = this.#workouts.find(
+    work => work.id === workoutEl.dataset.id
+  ); 
+
+  // move the map to the workout coordinates
+  this.#map.setView(workout.coords, this.#mapZoomLevel, {
+    animate: true,
+    pan: {
+      duration: 1,
+    },
+  });
+  console.log(`Navigated to ${workout.type} worked at`, workout.coords );
+}
 
   _getPosition() {
     if (navigator.geolocation) {
@@ -211,9 +250,22 @@ class App {
     // Handling clicks on map
     this.#map.on('click', this._showForm.bind(this));
 
+    this._renderStoredWorkouts();
+
     console.log('🗺️ Map loaded successfully at user location');
   }
 
+  _renderStoredWorkouts() {
+    this.#workouts.forEach(workout => {
+      this._renderWorkoutMarker(workout);
+      this._renderWorkout(workout);
+    });
+
+    if(this.#workouts.length > 0) {
+    console.log(`Rendered ${this.#workouts.length} workouts stored.`);
+    }
+  }
+   
   _showForm(mapE) {
     this.#mapEvent = mapE;
     form.classList.remove('hidden');
@@ -300,6 +352,8 @@ class App {
 
     this._renderWorkout(workout);
 
+    this._setLocalStorage();
+
     this._hideForm();
   }
 
@@ -371,6 +425,52 @@ class App {
         `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
       )
       .openPopup();
+  }
+
+  _setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+    console.log('Workouts saved to local storage');
+  }
+
+  _getLocalStorage() {
+    const data = localStorage.getItem('workouts');
+
+    // check if there is any data
+    if (!data) return;
+
+    // parse the JSON data back to objects
+    const storedWorkouts = JSON.parse(data);
+    console.log('Retrieved workouts from local storage:', storedWorkouts);
+
+    // restore proper workout objects with inheritance
+    this.#workouts = storedWorkouts.map(workoutData => {
+      let workout;
+
+      if (workoutData.type === 'running') {
+        workout = new Running(
+          workoutData.coords,
+          workoutData.distance,
+          workoutData.duration,
+          workoutData.cadence
+        );
+      }
+
+      if (workoutData.type === 'cycling') {
+        workout = new Cycling(
+          workoutData.coords,
+          workoutData.distance,
+          workoutData.duration,
+          workoutData.elevationGain
+        );
+      }
+
+      // restore other properties
+      workout.date = new Date(workoutData.date);
+      workout.id = workoutData.id;
+      workout.clicks = workoutData.clicks;
+
+      return workout;
+    });
   }
 }
 
